@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content="0; url=/frontend-/" />
+    <title>Redirecting...</title>
+    <script>
+      (() => {
+        const repoPath = '/frontend-';
+        const currentPath = window.location.pathname;
+        const search = window.location.search || '';
+        const hash = window.location.hash || '';
+
+        if (currentPath === repoPath || currentPath === repoPath + '/') {
+          window.location.replace(repoPath + '/' + search + hash);
+          return;
+        }
+
+        const route = currentPath.startsWith(repoPath)
+          ? currentPath.slice(repoPath.length)
+          : currentPath;
+
+        window.location.replace(repoPath + '/' + (route || '') + search + hash);
+      })();
+    </script>
+  </head>
+  <body>
+    Redirecting to the app...
+  </body>
+</html>

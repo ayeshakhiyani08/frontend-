@@ -1,5 +1,7 @@
 ﻿import { useEffect, useMemo, useRef, useState } from 'react';
 import { BrowserRouter, Navigate, NavLink, Outlet, Route, Routes, useNavigate, useParams } from 'react-router-dom';
+
+const appBasename = (import.meta.env.BASE_URL || '/').replace(/\/$/, '') || '/';
 import { io } from 'socket.io-client';
 import { api } from './services/api';
 import './App.css';
@@ -1562,7 +1564,7 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={appBasename}>
       <Toaster toast={toast} onClose={() => setToast(null)} />
       <Routes>
         <Route path="/" element={isLoggedIn ? <Navigate to={role === 'customer' ? '/customer/dashboard' : '/agent/dashboard'} replace /> : <LandingPage setRole={setRole} />} />
