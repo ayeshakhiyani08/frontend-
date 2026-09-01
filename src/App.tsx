@@ -3,10 +3,10 @@ import { BrowserRouter, Navigate, NavLink, Outlet, Route, Routes, useNavigate, u
 
 const appBasename = (import.meta.env.BASE_URL || '/').replace(/\/$/, '') || '/';
 import { io } from 'socket.io-client';
-import { api } from './services/api';
+import { API_BASE_URL, api } from './services/api';
 import './App.css';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
+const API_URL = API_BASE_URL;
 
 const defaultUsers = {
   customer: { name: 'Ali Khan', email: 'customer@supportflow.com', role: 'customer' },

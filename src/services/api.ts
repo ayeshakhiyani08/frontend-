@@ -1,7 +1,28 @@
 ﻿import axios from 'axios';
 
+export const resolveApiBaseUrl = () => {
+  const configured = import.meta.env.VITE_API_URL?.trim();
+  if (configured) {
+    return configured.replace(/\/+$/, '');
+  }
+
+  const hostname = typeof window === 'undefined' ? 'localhost' : window.location.hostname;
+
+  if (hostname === 'localhost' || hostname === '127.0.0.1') {
+    return 'http://localhost:5001/api';
+  }
+
+  if (hostname.includes('github.io')) {
+    return 'https://backend-1.onrender.com/api';
+  }
+
+  return 'http://localhost:5001/api';
+};
+
+export const API_BASE_URL = resolveApiBaseUrl();
+
 export const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5001/api',
+  baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
